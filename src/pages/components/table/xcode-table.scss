@@ -1,0 +1,21 @@
+.xcode-table{
+  color: grey;
+  padding: 8px;
+  .xcode-table-head{
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .grey{
+    background-color: #fafafa;
+  }
+  .xcode-table-row{
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+    padding: 5px;
+    .xcode-table-col{
+
+    }
+  }
+}
