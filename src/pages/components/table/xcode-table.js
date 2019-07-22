@@ -17,17 +17,17 @@ export default class Table extends React.Component {
             headInfo= {},//保存head渲染数据
             needCopyData =false//判断某个head有没有sorter之类需要本地拷贝数据的property
         const onClickWrapper = (h)=>{
-            let sorted = false//每个head都单独保存一个sorted
+            let revserseSorted = false//排过序为true,之后一直反复反向排序
             return ()=>{
-                console.log(sorted)
-                if(sorted){
+                const {dataSource} = this.state
+                if(revserseSorted){
                     this.setState({
-                        dataSource:dataSource.slice()
-                    }, ()=>{sorted=false})
+                        dataSource:dataSource.reverse(),
+                    })
                 }else{
                     this.setState({
                         dataSource:this.state.dataSource.sort(h.sorter)
-                    }, ()=>{sorted=true})
+                    }, ()=>{revserseSorted=true})
                 }
             }
         }

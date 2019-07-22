@@ -28,7 +28,8 @@ export default class Home extends React.Component{
             title:'#',
             dataIndex:'num',
             key:'num',
-            width: '5%'
+            width: '5%',
+            sorter:(a, b)=>(a.num-b.num)
         },
         {
             title:'Title',
