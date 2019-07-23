@@ -96,6 +96,9 @@ export default class Home extends React.Component{
         return(
             <div>
                 <div className='left'>
+                    <div className='filter'>
+
+                    </div>
                     <Table
                         heads={this.columns}
                         dataSource={this.data}

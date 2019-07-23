@@ -9,8 +9,11 @@ export default class Table extends React.Component {
         this.initState(props)
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState(nextProps)
+        if(nextProps.dataSource!==this.props.dataSource||nextProps.heads!==this.props.heads){
+            this.initState(nextProps)
+        }
     }
+
     initState = (props)=>{
         const {heads=[], dataSource=[]} = props
         let dataInfo = {},//保存body渲染数据
