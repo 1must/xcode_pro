@@ -1,7 +1,10 @@
 import React from 'react'
+import {bindActionCreators} from "redux";
+import {connect} from 'react-redux'
+import * as actions from '../../actions/home/index'
 import Table from '../components/table/xcode-table'
 import Tag from '../components/tag/tag'
-import Filter from '../components/filter/filter'
+//import Filter from '../components/filter/filter'
 import {CheckIcon, QuestIcon} from '../components/icon/icon'
 import './index.scss'
 
@@ -26,7 +29,7 @@ let heads = [
         dataIndex:'num',
         key:'num',
         width: '5%',
-        sorter:(a, b)=>(a.num-b.num)
+        //sorter:(a, b)=>(a.num-b.num)
     },
     {
         title:'Title',
@@ -43,7 +46,7 @@ let heads = [
         dataIndex:'passrate',
         key:'passrate',
         width:'10%',
-        sorter:(a, b)=>(parseInt(a.passrate)-parseInt(b.passrate))
+        //sorter:(a, b)=>(parseInt(a.passrate)-parseInt(b.passrate))
     },
     {
         title:'Difficulty',
@@ -62,58 +65,43 @@ let heads = [
             return (<Tag value={tag} color={color}/>)
         }
     }
-],
-dataSource = [
-    {
-        key:1,
-        status:'',
-        num:1,
-        title:'对称二叉树',
-        passrate:'50%',
-        difficulty:'Medium'
-    },
-    {
-        key:2,
-        status:'on',
-        num:2,
-        title:'对称二叉树',
-        passrate:'20%',
-        difficulty:'Hard'
-    },
-    {
-        key:3,
-        status:'finish',
-        num:3,
-        title:'对称二叉树',
-        passrate:'25%',
-        difficulty:'Easy'
-    }
-],
-placeholder = '搜索题目 名称，内容或编号'
+]
 
-export default class Home extends React.Component{
+
+
+class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state={
             heads:heads||[],
-            dataSource:dataSource||[]
         }
+    }
+    componentDidMount() {
+        this.props.getAllExercise()
     }
 
     render(){
-        const{heads, dataSource} = this.state
+        const{heads} = this.state
         return(
             <div>
                 <div className='left'>
-                    <Filter
-                        placehoder={placeholder}
-                    />
                     <Table
                         heads={heads}
-                        dataSource={dataSource}
+                        dataSource={this.props.data.allExercise}
                     />
                 </div>
             </div>
         )
     }
 }
+
+export default connect(
+    state=>{
+        return {
+            data:state.AllExercise
+        }
+    },
+    dispatch=>{
+        return bindActionCreators({...actions}, dispatch)
+    }
+)(Home)

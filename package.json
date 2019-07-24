@@ -4,11 +4,16 @@
   "private": true,
   "dependencies": {
     "antd": "^3.20.5",
+    "axios": "latest",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-promise": "^0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

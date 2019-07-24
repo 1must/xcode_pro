@@ -6,7 +6,7 @@ import './xcode-table.scss'
 export default class Table extends React.Component {
     constructor(props){
         super(props)
-        this.initState(props)
+        this.initState(props, true)
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.dataSource!==this.props.dataSource||nextProps.heads!==this.props.heads){
@@ -14,51 +14,57 @@ export default class Table extends React.Component {
         }
     }
 
-    initState = (props)=>{
-        const {heads=[], dataSource=[]} = props
+    initState = (props, isFirstInitail=false)=> {
+        const {heads = [], dataSource = []} = props
         let dataInfo = {},//保存body渲染数据
-            headInfo= {},//保存head渲染数据
-            needCopyData =false//判断某个head有没有sorter之类需要本地拷贝数据的property
-        const onClickWrapper = (h)=>{
+            headInfo = {},//保存head渲染数据
+            needCopyData = false//判断某个head有没有sorter之类需要本地拷贝数据的property
+        const onClickWrapper = (h) => {
             let revserseSorted = false//排过序为true,之后一直反复反向排序
-            return ()=>{
+            return () => {
                 const {dataSource} = this.state
-                if(revserseSorted){
+                if (revserseSorted) {
                     this.setState({
-                        dataSource:dataSource.reverse(),
+                        dataSource: dataSource.reverse(),
                     })
-                }else{
+                } else {
                     this.setState({
-                        dataSource:this.state.dataSource.sort(h.sorter)
-                    }, ()=>{revserseSorted=true})
+                        dataSource: this.state.dataSource.sort(h.sorter)
+                    }, () => {
+                        revserseSorted = true
+                    })
                 }
             }
         }
-        const judgeNeedCopyData = (h)=>{//如果外部提供了sorter就需要内部保存一份data
-            if(h.sorter){
-                needCopyData =true
+        const judgeNeedCopyData = (h) => {//如果外部提供了sorter就需要内部保存一份data
+            if (h.sorter) {
+                needCopyData = true
                 return true
-            }else
+            } else
                 return false
         }
-        heads.forEach((h)=>{
+        heads.forEach((h) => {
             headInfo[h.dataIndex] = {
-                value:h.title||h.dataIndex,
+                value: h.title || h.dataIndex,
                 key: h.key,
-                width:h.width||'60px',
-                onClick:judgeNeedCopyData(h)?onClickWrapper(h):null,
+                width: h.width || '60px',
+                onClick: judgeNeedCopyData(h) ? onClickWrapper(h) : null,
             }
             dataInfo[h.dataIndex] = {
-                render:h.render||null,
-                width:h.width||'60px',
-                align:h.align||'left',
+                render: h.render || null,
+                width: h.width || '60px',
+                align: h.align || 'left',
             }
         })
-
-        this.state={
+        let state = {
             dataInfo,
             headInfo,
-            dataSource:needCopyData?dataSource.slice():null,
+            dataSource: needCopyData ? dataSource.slice() : null,
+        }
+        if (isFirstInitail) {
+            this.state = state
+        }else{
+            this.setState(state)
         }
     }
     render(){

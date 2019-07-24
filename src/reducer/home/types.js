@@ -1,0 +1,1 @@
+export const GET_ALL_EXERCISE = 'GET_ALL_EXERCISE'
