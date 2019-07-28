@@ -84,7 +84,7 @@ export default class Table extends React.Component {
                 }
                 {dataSource.map((v,i)=>{
                     return (<TableRow
-                        key={v.key}
+                        key={v.key||i}
                         list={headList.map(h=>({...dataInfo[h], value:v[h], key:h}))}
                         color={i%2?'white':'grey'}
                     />)
@@ -107,7 +107,7 @@ class TableRow extends React.Component{
                     list.map((v,i)=>{
 
                         return (<TableCol
-                            key={v.key}
+                            key={v.key||i}
                             value={v}
                             width={v.width}
                             onClick={v.onClick}

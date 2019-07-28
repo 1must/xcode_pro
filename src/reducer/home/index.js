@@ -8,9 +8,10 @@ const initialState = {
 
 const AllExerciseReducer = handleActions({
     [Types.GET_ALL_EXERCISE](state, {payload, error}){
+        let allExercise = payload.data
         return {
             ...state,
-            allExercise: payload.data
+            allExercise: allExercise||[]
         }
     }
 }, initialState)

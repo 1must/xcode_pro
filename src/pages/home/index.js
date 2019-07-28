@@ -2,10 +2,10 @@ import React from 'react'
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux'
 import * as actions from '../../actions/home/index'
-import Table from '../components/table/xcode-table'
-import Tag from '../components/tag/tag'
+import Table from '../../components/table/xcode-table'
+import Tag from '../../components/tag/tag'
 //import Filter from '../components/filter/filter'
-import {CheckIcon, QuestIcon} from '../components/icon/icon'
+import {CheckIcon, QuestIcon} from '../../components/icon/icon'
 import './index.scss'
 
 let heads = [
@@ -26,10 +26,16 @@ let heads = [
     },
     {
         title:'#',
-        dataIndex:'num',
-        key:'num',
+        dataIndex:'id',
+        key:'id',
         width: '5%',
         //sorter:(a, b)=>(a.num-b.num)
+        render:(()=>{
+            let index = 1
+            return ()=>{
+                return(<div>{index++}</div>)
+            }
+        })()
     },
     {
         title:'Title',
@@ -43,7 +49,7 @@ let heads = [
     },
     {
         title:'Passrate',
-        dataIndex:'passrate',
+        dataIndex:'acrate',
         key:'passrate',
         width:'10%',
         //sorter:(a, b)=>(parseInt(a.passrate)-parseInt(b.passrate))
@@ -54,7 +60,7 @@ let heads = [
         key:'difficulty',
         width:'10%',
         render:tag=>{
-            let color
+            let color='green'
             if(tag==='Hard'){
                 color = '#d9534f'
             }else if(tag==='Medium'){
