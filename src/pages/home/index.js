@@ -42,10 +42,13 @@ let heads = [
         dataIndex:'title',
         key:'title',
         width:'60%',
-        render:(title)=>{
-            return (<a href={title}>{title}</a>)
+        render:(()=>{
+            let id = 1
+            return (title)=>{
+                return (<a href={'exercise/'+id++}>{title}</a>)
 
-        }
+            }
+        })()
     },
     {
         title:'Passrate',
@@ -103,6 +106,7 @@ class Home extends React.Component{
 
 export default connect(
     state=>{
+        console.log(state)
         return {
             data:state.AllExercise
         }
