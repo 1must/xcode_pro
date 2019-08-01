@@ -2,7 +2,7 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as actions from '../../actions/exericse'
-
+import './index.scss'
 
 class Exercise extends React.Component{
     constructor(props){
@@ -18,8 +18,13 @@ class Exercise extends React.Component{
     render(){
         const {data} = this.props
         console.log('hello',data)
-        return (<div dangerouslySetInnerHTML={{__html:data.ExerciseDescription}}>
-
+        return (<div className={'description'}>
+            <div className={'title-wrapper'}>
+                <div className={'title'} dangerouslySetInnerHTML={{__html:data.title}}></div>
+            </div>
+            <div className={'content-wrapper'}>
+                <div className={'content'} dangerouslySetInnerHTML={{__html:data.content}}></div>
+            </div>
         </div>)
     }
 }

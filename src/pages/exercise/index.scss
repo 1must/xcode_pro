@@ -1,0 +1,24 @@
+.description{
+  .title-wrapper{
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 40px;
+  }
+  .content-wrapper{
+    display: flex;
+    justify-content: center;
+
+    .content{
+      max-width: 1000px;
+      min-width: 800px;
+      pre{
+        background-color: #f7f9fa;
+        padding:10px 15px;
+        line-height: 1.6;
+        font-size: 13px;
+        border-radius: 3px;
+      }
+    }
+  }
+}

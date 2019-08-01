@@ -42,20 +42,16 @@ let heads = [
         dataIndex:'title',
         key:'title',
         width:'60%',
-        render:(()=>{
-            let id = 1
-            return (title)=>{
-                return (<a href={'exercise/'+id++}>{title}</a>)
-
+        render:(data)=>{
+                return (<a href={'exercise/'+data.id}>{data.title}</a>)
             }
-        })()
     },
     {
         title:'Passrate',
         dataIndex:'acrate',
         key:'passrate',
         width:'10%',
-        //sorter:(a, b)=>(parseInt(a.passrate)-parseInt(b.passrate))
+        sorter:(a, b)=>(parseInt(a.passrate)-parseInt(b.passrate))
     },
     {
         title:'Difficulty',
@@ -91,12 +87,19 @@ class Home extends React.Component{
 
     render(){
         const{heads} = this.state
+        const data = this.props.data.allExercise
+        let dataSource = data.map(d=>{
+            return {
+                ...d,
+                title:{title:d.title,id:d.id}
+            }
+        })
         return(
             <div>
                 <div className='left'>
                     <Table
                         heads={heads}
-                        dataSource={this.props.data.allExercise}
+                        dataSource={dataSource}
                     />
                 </div>
             </div>
